@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if page.permalink == "/" %}
+        <title>ISPMA {{ page.title }}</title>
+    {% else %}
+        <title>{{ page.title }} - ISPMA</title>
+    {% endif %}
+
+    {% include head/socials.html %}
+
+    {% comment %}
+    {% include head/google-verification.html %}
+    {% include head/google-analytics.html %}
+    {% endcomment %}
+
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/styles/site.css">
+        
+    <link rel="icon" href="{{ site.baseurl }}/assets/images/favicon.png" sizes="32x32" />
+</head>
+<body class="{{ page.title | slugify }} {{ page.layout | slugify }} {{ page.body_class }}">

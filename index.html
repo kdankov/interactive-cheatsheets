@@ -1,0 +1,81 @@
+---
+layout: main
+title: Flexbox
+permalink: /
+---
+
+<input type="checkbox" class="hidden" id="toggle-flex-gap">
+<input type="checkbox" class="hidden" id="toggle-flex-wrap">
+
+<input type="radio" name="toggle-align-items" class="hidden" id="toggle-align-items-stretch" checked>
+<input type="radio" name="toggle-align-items" class="hidden" id="toggle-align-items-start">
+<input type="radio" name="toggle-align-items" class="hidden" id="toggle-align-items-center">
+<input type="radio" name="toggle-align-items" class="hidden" id="toggle-align-items-end">
+
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-start" checked>
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-center">
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-end">
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-space-around">
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-space-between">
+<input type="radio" name="toggle-justify-content" class="hidden" id="toggle-justify-content-space-evenly">
+
+<header>
+  <h2>Flexbox (default)</h2>
+  <h3>flex-direction: row;</h3>
+  <label class="btn" for="toggle-flex-gap">gap</label>
+  <label class="btn" for="toggle-flex-wrap">flex-wrap</label>
+</header>
+
+<section>
+
+  <div></div>
+  <label class="line horizontal size size-main">Main Size</label>
+  <div></div>
+
+  <label class="line vertical size size-cross">Cross Size</label>
+
+  <div class="flex-container">
+
+    <div class="flex-item"><span>1</span></div>
+    <div class="flex-item"><span>2</span></div>
+    <div class="flex-item"><span>3</span></div>
+    <div class="flex-item"><span>4</span></div>
+
+    <label class="axis line main">Main Axis</label>
+    <label class="axis line vertical cross">Cross Axis</label>
+  </div>
+
+  <div>
+    <label class="line vertical property align-items" title="align-items: stretch;">
+      align-items
+      <span class="tooltip">
+        <label class="btn" for="toggle-align-items-stretch">stretch</label>
+        <label class="btn" for="toggle-align-items-start">flex-start</label>
+        <label class="btn" for="toggle-align-items-center">center</label>
+        <label class="btn" for="toggle-align-items-end">flex-end</label>
+      </span>
+    </label>
+    <label class="marker cross start">Cross Start</label>
+    <label class="marker cross end">Cross End</label>
+  </div>
+
+  <div></div>
+  <div>
+    <label class="line horizontal property justify-content" title="justify-content: flex-start;">
+      justify-content
+      <span class="tooltip">
+        <label class="btn" for="toggle-justify-content-start">flex-start</label>
+        <label class="btn" for="toggle-justify-content-center">center</label>
+        <label class="btn" for="toggle-justify-content-end">flex-end</label>
+
+        <label class="btn" for="toggle-justify-content-space-around">space-around</label>
+        <label class="btn" for="toggle-justify-content-space-between">space-between</label>
+        <label class="btn" for="toggle-justify-content-space-evenly">space-evenly</label>
+      </span>
+    </label>
+    <label class="marker main start">Main Start</label>
+    <label class="marker main end">Main End</label>
+  </div>
+  <div></div>
+
+</section>

@@ -1,0 +1,105 @@
+fieldset {
+	border: none;
+	display: flex;
+	gap: 2em;
+
+	.form-element {
+		flex: 1 1 auto;
+	}
+
+	legend {
+		display: none;
+	}
+}
+
+.is-hidden {
+	display: none !important;
+}
+
+form[action*="formspree"] {
+	fieldset {
+		flex-wrap: wrap;
+
+		.textarea,
+		.file {
+			flex: 1 0 100%;
+		}
+
+		
+	}
+}
+
+.certificates {
+	display: flex;
+	gap: 2em;
+	padding-bottom: 8em;
+
+	li, a, img {
+		display: block;
+	}
+
+	li {
+		flex: 0 0 22%;
+	}
+
+	li, a {
+		border: 2px solid var(--color-text-title);
+		border-radius: var(--border-radius);
+	}
+
+	a {
+		border-color: #fff;
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+		border-radius: var(--border-radius);
+	}
+}
+
+.modal .buttons {
+	display: none;
+	justify-content: flex-start;
+	gap: 2em;
+}
+
+.modal .status-message {
+	display: none;
+}
+
+form.status-success {
+	display: none;
+	
+	& + .status-message {
+		display: block;
+		color: #090;
+	}
+
+	& ~ .buttons {
+		display: flex;
+
+		button {
+			filter: grayscale(1);
+		}
+	}
+}
+
+form.status-sending {
+	display: none;
+
+	& + .status-message {
+		display: block;
+		color: #666;
+	}
+}
+
+form.status-error {
+	& + .status-message {
+		display: block;
+		color: #C00;
+	}
+}
+
+
+

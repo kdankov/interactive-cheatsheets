@@ -1,0 +1,26 @@
+body {
+  min-height: 100vh;
+  background: #eee;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  transition: transform 2.6s ease-in-out;
+  transform: rotate(0);  
+  
+  &.rotate {
+    transform: rotate(90deg);
+  }
+  
+  
+  & > div {
+    position: relative;
+    display: flex;
+  }
+}

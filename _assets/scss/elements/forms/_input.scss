@@ -1,0 +1,122 @@
+.form-element {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+
+	&.hidden {
+		position: absolute;
+		top: 0; left: 0;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	label {
+		position: absolute;
+		top: calc( var(--padding-input) * 0.6 );
+		left: calc( var(--padding-input) + 0.25em );
+		font-size: 0.7em;
+		text-transform: uppercase;
+		pointer-events: none;
+		z-index: 1;
+		opacity: 0;
+		color: var(--color-fourground);
+		
+		order: 1;
+		transition: 
+			opacity var(--transition-base),
+			transform var(--transition-base);
+
+		&::before {
+			display: block;
+			content: '';
+			background: var(--color-background);
+			inset: -0.4em;
+			width: 95%;
+			z-index: -1;
+			position: absolute;
+		}
+	}
+
+	&.checkbox,
+	&.radio {
+		label {
+			position: static;
+			opacity: 1;
+		}
+	}
+
+	select,
+	textarea,
+	.select-field,
+	input[type="text"],
+	input[type="date"],
+	input[type="file"],
+	input[type="number"],
+	input[type="phone"],
+	input[type="password"],
+	input[type="email"] {
+		order: 2;
+		appearance: none;
+		padding: calc( var(--padding-input) * 1.75 ) calc(var(--padding-input) * 1.12) calc(var(--padding-input) * 0.45) calc(var(--padding-input) * 1.12);
+		width: 100%;
+		display: block;
+		color: var(--color-fourground);
+		background-color: var(--color-background);
+		outline: none;
+		border: 2px solid var(--color-accent-2-shade-1);
+		border-radius: var(--border-radius);
+		text-overflow: ellipsis;
+		font-size: 1em;
+		transition: 
+			// border-color var(--base-transition),
+			all var(--base-transition);
+
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.5;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&:invalid:not(:placeholder-shown):not(:focus) {
+			color: var(--color-forms-error);
+			border-color: var(--color-forms-error);
+		}
+
+		&:placeholder-shown {
+			padding: calc( var(--padding-input) * 1.11 );
+		}
+
+		&::placeholder {
+			color: #f3ad08;
+			transition: 
+				color var(--transition-base),
+				transform var(--transition-base);
+			transition-delay: 200ms;
+		}
+
+		&:focus {
+			border-color: #f3ad08;
+		}
+		
+		&:not(:placeholder-shown) + label,
+		&:-webkit-autofill + label { 
+			opacity: 1;
+		}
+
+		&:required + label:after {
+			display: inline-block;
+			content: '*';
+			color: var(--color-forms-error);
+			padding-left: 0.5em;
+		}
+	}
+
+	input[type="file"] {
+		background: var(--color-background);
+		padding: 2em 0.8em 0.9em;
+	}
+	
+}

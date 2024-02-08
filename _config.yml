@@ -1,0 +1,44 @@
+title: Flexbox
+footer: "Copyright © 2024 Konstantin Dankov. All rights reserved."
+email: koko@rhyndo.com
+description: >-
+  Cultivating knowledge
+baseurl: ""
+url: ""
+
+destination: _site
+
+socials:
+  twitter: Flexbox
+  youtube: Flexbox
+  instagram: Flexbox
+  linkedin: Flexbox
+
+# Collections
+collections_dir: _content
+
+collections:
+  posts:
+    output: true
+
+sass:
+  style: compressed
+  sass_dir: _assets/scss
+  sourcemap: development
+
+# Build settings
+plugins:
+  - jekyll-sass-converter
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - README.md
+  - vendor/
+

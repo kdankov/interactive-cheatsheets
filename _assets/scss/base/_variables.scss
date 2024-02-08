@@ -1,0 +1,16 @@
+:root {
+	--clr-border: #999;
+	--clr-background: rgb(0, 0, 0, 0.1);
+	--clr-text: #333;
+	--clr-border-marker: rgb(0, 0, 120, 0.4);
+  
+	--padding-inline: 1.4em;
+	--padding-block: 1em;
+  
+	--border-radius: 0.3em;
+  
+	--shadow-inner-size: 0.2em;
+	--shadow-inner-color: rgba(255, 255, 255, 0.6);
+	--shadow-outer-size: var(--shadow-inner-size, 0.3em);
+	--shadow-outer-color: rgba(0, 0, 0, 0.1);
+  }

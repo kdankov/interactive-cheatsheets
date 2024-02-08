@@ -1,0 +1,315 @@
+:is(.flex-container, .flex-item) {
+    display: flex;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--border-radius);
+    padding: var(--padding-block) var(--padding-inline);
+    background: var(--clr-background);
+    color: var(--clr-text);
+    position: relative;
+    box-shadow: 
+      var(--shadow-inner-size) var(--shadow-inner-size) 0 0 var(--shadow-inner-color) inset,
+      var(--shadow-outer-size) var(--shadow-outer-size) 0 0 var(--shadow-outer-color)
+    ;
+  
+    &::after {
+      display: block;
+      content: "flex-container";
+      padding: calc(var(--padding-block) / 2) calc(var(--padding-inline) / 2);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      line-height: 1;
+      font-size: 0.8em;
+    }
+  }
+  
+  .flex-container {
+    --shadow-outer-size: 0;
+    
+    width: 880px;
+    padding-top: 1.7em;
+    padding-left: 1.7em;
+    padding-bottom: 2em;
+    overflow: hidden;
+    resize: both;
+    min-width: 300px;
+    min-height: 320px;
+  
+    &.flex-wrap-wrap {
+      flex-wrap: wrap;
+    }
+  }
+  
+  .flex-item {
+    --shadow-outer-size: 0.2em;
+    --clr-background: rgb(255, 255, 255, 0.2);
+    --clr-border: #666;
+    --padding-inline: 2.5em;
+    --padding-block: 2em;
+  
+    font-size: 1.2em;
+  
+    span {
+      font-family: Lato, sans-serif;
+      opacity: 0.4;
+      font-weight: 900;
+      font-size: 1.4em;
+      line-height: 1;
+      padding-bottom: 1em;
+    }
+  
+    &::after {
+      content: "flex-item";
+      right: initial;
+      left: 0;
+      opacity: 0.8;
+    }
+  }
+  
+  .line {
+    --label-spacing: 0.4em;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 0.5em;
+    line-height: 1;
+    text-transform: lowercase;
+  
+    &.property,
+    &.size {
+      border-inline: 1px dashed var(--clr-border-marker);
+    }
+  
+    &.size {
+      color: #090;
+    }
+  
+    &.property {
+      color: purple;
+    }
+  
+    &.horizontal {
+      flex-grow: 1;
+      &::before,
+      &::after {
+        top: 2px;
+      }
+    }
+    
+    &.vertical {
+      &::before,
+      &::after {
+        right: 2px;
+      }
+    }
+  
+  
+    &::before,
+    &::after {
+      font-weight: bold;
+      display: block;
+      content: "";
+      block-size: 1px;
+      flex: 1 0 auto;
+      background: currentColor;
+      position: relative;
+    }
+  
+    &::before {
+      margin-inline-end: var(--label-spacing);
+    }
+  
+    &::after {
+      margin-inline-start: calc(var(--label-spacing) * 1.5);
+    }
+  
+    &.vertical {
+      writing-mode: vertical-lr;
+    }
+    
+    & .tooltip {
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      flex-direction: column;
+      position: absolute;
+      padding-block-start: 1em;
+      writing-mode: horizontal-tb;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-55%);
+      width: 6em;
+      gap: 0.5em;
+      transition: opacity 0.3s ease-in;
+      
+      label {
+        width: 100%;
+        display: block;
+        text-align: center;
+        white-space: nowrap;
+      }
+    }
+    
+    &.horizontal .tooltip {
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, -15%);
+      flex-direction: row;
+      width: 25em;
+      padding: 1em;
+      flex-wrap: wrap;
+      
+      label.btn {
+        flex: 0 0 28%;
+      }
+    }
+    
+    &:hover .tooltip {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+  
+  .marker {
+    position: absolute;
+    left: 100%;
+    line-height: 1;
+    color: var(--clr-border-marker);
+    text-align: center;
+    text-transform: lowercase;
+  
+    &.start {
+      top: -1em;
+    }
+  
+    &.end {
+      bottom: -1em;
+    }
+  
+    &.main {
+      top: 100%;
+      left: initial;
+      width: 2em;
+      transform: translateX(-50%);
+  
+      &.start {
+        left: 0;
+      }
+  
+      &.end {
+        left: 100%;
+      }
+    }
+  }
+  
+  .axis {
+    position: absolute;
+  
+    &.main {
+      top: -0.1em;
+      left: 0;
+      width: 100%;
+      color: #900;
+  
+      &::before {
+        inline-size: 2em;
+        flex-grow: 0;
+      }
+    }
+  
+    &.cross {
+      top: 0;
+      left: 0;
+      height: 100%;
+      color: #900;
+  
+      &::before {
+        inline-size: 2em;
+        flex-grow: 0;
+      }
+    }
+  }
+  
+  header {
+    padding-bottom: 1em;
+    text-align: center;
+  
+    h2 {
+    }
+    
+    h3 {
+      display: inline-block;
+      opacity: 0.7;
+      text-align: center;
+    }
+  }
+  
+  .btn {
+      display: inline-block;
+      cursor: pointer;
+  
+      &:not([for]) {
+        opacity: 0.5;
+  
+        &::before {
+          display: inline-block;
+          content: "/";
+          padding-inline: 1em;
+        }
+      }
+  
+      &[for] {
+        padding: 0.2em 0.8em;
+        background: rgb(255, 255, 255);
+        border-radius: 0.3em;
+        margin-left: 0.3em;
+        line-height: 1;
+        padding-bottom: 0.3em;
+  
+        &:hover {
+          background: rgb(0, 120, 0, 0.1);
+        }
+      }
+    }
+  
+  input.hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #toggle-justify-content-start:checked ~ section label[for="toggle-justify-content-start"],
+  #toggle-justify-content-center:checked ~ section label[for="toggle-justify-content-center"],
+  #toggle-justify-content-end:checked ~ section label[for="toggle-justify-content-end"],
+  
+  #toggle-align-items-stretch:checked ~ section label[for="toggle-align-items-stretch"],
+  #toggle-align-items-start:checked ~ section label[for="toggle-align-items-start"],
+  #toggle-align-items-center:checked ~ section label[for="toggle-align-items-center"],
+  #toggle-align-items-end:checked ~ section label[for="toggle-align-items-end"],
+  
+  #toggle-flex-wrap:checked ~ header label[for="toggle-flex-wrap"],
+  #toggle-flex-gap:checked ~ header label[for="toggle-flex-gap"] {
+    background: #090;
+    color: #fff;
+  }
+  
+  #toggle-flex-wrap:checked ~ section .flex-container {
+    flex-wrap: wrap;
+  }
+  
+  #toggle-flex-gap:checked ~ section .flex-container {
+    gap: 1.5em;
+  }
+  
+  #toggle-align-items-stretch:checked ~ section .flex-container { align-items: stretch;}
+  #toggle-align-items-start:checked ~ section .flex-container { align-items: flex-start; }
+  #toggle-align-items-center:checked ~ section .flex-container { align-items: center; }
+  #toggle-align-items-end:checked ~ section .flex-container { align-items: flex-end; }
+  
+  #toggle-justify-content-start:checked ~ section .flex-container { justify-content: flex-start; }
+  #toggle-justify-content-center:checked ~ section .flex-container { justify-content: center; }
+  #toggle-justify-content-end:checked ~ section .flex-container { justify-content: flex-end; }
+  #toggle-justify-content-space-around:checked ~ section .flex-container { justify-content: space-around; }
+  #toggle-justify-content-space-between:checked ~ section .flex-container { justify-content: space-between; }
+  #toggle-justify-content-space-evenly:checked ~ section .flex-container { justify-content: space-evenly; }

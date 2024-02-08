@@ -1,0 +1,67 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["production"]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: REST API with curl
+        run: |
+          curl -X GET curl -X POST --data-urlencode "payload={\"channel\": \"#project-website\", \"text\": \"Production Deployment in progress ...\"}" "https://hooks.slack.com/services/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"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          ruby-version: '3.1' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Build with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      - name: Upload files
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ${{ secrets.ftp_server }}
+          username: ${{ secrets.ftp_username }}
+          password: ${{ secrets.ftp_password }}
+          local-dir: _site/
+          server-dir: public_html_deploying/
+          dangerous-clean-slate: true
+      - name: Rename web root folder after upload
+        shell: python
+        run: |
+          import ftplib
+          from datetime import datetime
+          ftp = ftplib.FTP('${{ secrets.ftp_server }}')
+          ftp.login('${{ secrets.ftp_username }}', '${{ secrets.ftp_password }}')
+          now = datetime.now()
+          dt_now = now.strftime("%d-%m-%Y_%H-%M-%s")
+          ftp.rename('public_html', 'public_html_' + dt_now)
+          ftp.quit()
+      - name: Rename web root folder after upload
+        shell: python
+        run: |
+          import ftplib
+          ftp = ftplib.FTP('${{ secrets.ftp_server }}')
+          ftp.login('${{ secrets.ftp_username }}', '${{ secrets.ftp_password }}')
+          ftp.rename('public_html_deploying', 'public_html')
+          ftp.quit()
+      - name: REST API with curl
+        run: |
+          curl -X GET curl -X POST --data-urlencode "payload={\"channel\": \"#project-website\", \"text\": \"Production Deployment Finished\"}" "https://hooks.slack.com/services/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"

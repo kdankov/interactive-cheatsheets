@@ -1,0 +1,23 @@
+---
+# ISPMA Website styles
+#
+# The master CSS file.
+# 
+# One css to rule them all, One css to find them; One css to bring them all
+#
+# The order of files include is important. Do NOT change it!
+---
+
+@import "base/reset";
+
+@import "base/variables";
+
+@import "base/typography";
+@import "base/layout";
+
+@import "components/flexbox";
+
+@import "section/header";
+@import "section/footer";
+
+@import "pages/default";
